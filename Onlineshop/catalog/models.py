@@ -4,9 +4,17 @@ from django.db import models
 class Manufacturer(models.Model):
     name = models.CharField(verbose_name="Производитель", max_length=20, blank=False, null=False)
 
+    class Meta:
+        verbose_name = 'Производитель'
+        verbose_name_plural = 'Производители'
+
 
 class Type(models.Model):
     name = models.CharField(verbose_name="Тип товара", max_length=20, blank=False, null=False)
+
+    class Meta:
+        verbose_name = 'Тип товара'
+        verbose_name_plural = 'Типы товаров'
 
 
 class Product(models.Model):
@@ -16,3 +24,7 @@ class Product(models.Model):
     seller = models.ForeignKey(Manufacturer, null=True, on_delete=models.SET_NULL)
     in_stock = models.IntegerField(verbose_name="В наличии")
     type = models.ForeignKey(Type, null=True, on_delete=models.SET_NULL)
+
+    class Meta:
+        verbose_name = 'Продукт'
+        verbose_name_plural = 'Продукты'

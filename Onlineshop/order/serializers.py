@@ -1,19 +1,23 @@
 from rest_framework import serializers
 
-from order.models import Order, OrderProduct
+from order.models import Order, ProductAmount
+from catalog.serializers import ProductSerializer
+
+
+class ProductAmountSerializer(serializers.ModelSerializer):
+
+    product = ProductSerializer()
+
+    class Meta:
+        model = ProductAmount
+        fields = '__all__'
 
 
 class OrderSerializer(serializers.ModelSerializer):
 
+    product_amount = ProductAmountSerializer(many=True)
+
     class Meta:
         model = Order
-        fields = ['orderer', 'date_of_order', 'address', 'date_of_delivery']
+        fields = ['date_of_order', 'address', 'date_of_delivery', 'product_amount']
 
-
-class OrderProductSerializer(serializers.ModelSerializer):
-    # todo queryset - The queryset used for model instance lookups when validating the field input. Relationships must either set a queryset explicitly, or set read_only=True.
-    product = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-
-    class Meta:
-        model = OrderProduct
-        fields = ['order', 'product', 'amount']
