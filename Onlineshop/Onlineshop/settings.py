@@ -60,6 +60,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
 }
 
 DJOSER = {
@@ -143,8 +144,12 @@ DATABASES = {
         "NAME": os.getenv("SQL_DATABASE"),
         "USER": os.getenv("SQL_USER", "user"),
         "PASSWORD": os.getenv("SQL_PASSWORD"),
-        "HOST": os.getenv("SQL_HOST"),
+        "HOST": "localhost",#os.getenv("SQL_HOST"),
         "PORT": os.getenv("SQL_PORT"),
+
+        'TEST': {
+            'NAME': 'test_db',
+        },
     }
 }
 
