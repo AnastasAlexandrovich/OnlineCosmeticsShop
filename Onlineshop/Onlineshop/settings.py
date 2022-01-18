@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'core',
     'catalog',
-    'order'
+    'order',
+    'behave_django'
 ]
 
 REST_FRAMEWORK = {
